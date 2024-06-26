@@ -1,8 +1,15 @@
 import React from 'react'
+import Navbar from '../components/Navbar'
+import { Link } from 'react-router-dom'
 
 const PodDetails = () => {
   return (
-    <div>PodDetails</div>
+    <>
+    <Navbar/>
+    <h2>Podcast details page</h2>
+    <p>Details of the selected podcast</p>
+    <Link to='/podcasts/:podcastId/episode/:episodeId'>to the selected episode details</Link>
+    </>
   )
 }
 
