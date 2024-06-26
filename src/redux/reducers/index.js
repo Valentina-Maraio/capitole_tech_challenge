@@ -1,7 +1,8 @@
 import { combineReducers } from "redux";
 
 const initialState = {
-    counter: 0
+    counter: 0,
+    multiplyCounter: 1
 }
 
 const counterReducer = (state = initialState, action) => {
@@ -21,8 +22,21 @@ const counterReducer = (state = initialState, action) => {
     }
 };
 
+const multiplyReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case "MULTIPLY":
+            return {
+                ...state,
+                multiplyCounter: state.multiplyCounter * 2
+            }
+        default:
+            return state;
+    }
+};
+
 const rootReducer = combineReducers({
-    counter: counterReducer
+    counter: counterReducer,
+    multiplyCounter: multiplyReducer
 })
 
 export default rootReducer;

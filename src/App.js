@@ -1,32 +1,12 @@
-import React from "react";
-import "./App.css";
+import React from 'react'
+import Home from './pages/Home'
 
-import { connect } from "react-redux";
-
-const App = ({ counter, increment, decrement}) => {
+const App = () => {
   return (
     <>
-      <div className="container">
-        <h1>Capitole Tech Challenge</h1>
-
-        <div className="counter_example">
-          <p>Counter: {counter}</p>
-          <button className="increment" onClick={increment}>Increment</button>
-          <button className="decrement" onClick={decrement}>Decrement</button>
-        </div>
-      </div>
+    <Home/>
     </>
-  );
-};
+  )
+}
 
-const mapStateToProps = (state) => ({
-  counter: state.counter.counter
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  increment: () => dispatch({ type: "INCREMENT" }),
-  decrement: () => dispatch({ type: "DECREMENT" })
-});
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App
