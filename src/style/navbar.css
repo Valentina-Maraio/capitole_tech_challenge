@@ -1,5 +1,12 @@
-.container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.nav_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+  outline-color: transparent;
+}
+
+
+h2 {
+  color: #307b99;
 }

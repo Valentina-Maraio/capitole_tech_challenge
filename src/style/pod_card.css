@@ -1,0 +1,31 @@
+.card_container {
+  max-width: 230px;
+  color: black;
+}
+
+.image_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card_image {
+  border: 1px solid black;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: -50px;
+}
+
+.card_layout {
+  border: 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 170px;
+  -moz-box-shadow: 0 0 8px gray;
+  -webkit-box-shadow: 0 0 8px gray;
+  box-shadow: 0 5px 8px gray;
+}
