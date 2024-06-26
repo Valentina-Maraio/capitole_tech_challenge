@@ -10,9 +10,15 @@ const PodCard = () => {
 
   useEffect(() => {
     if (status === "idle") {
-      dispatch(fetchTopPodcasts);
+      dispatch(fetchTopPodcasts());
     }
   }, [status, dispatch]);
+
+  useEffect(() => {
+    if (status === "succeeded") {
+      localStorage.setItem("topPodcasts", JSON.stringify(topPodcasts));
+    }
+  }, [status, topPodcasts]);
 
   if (status === "loading") {
     return <div>Loading...</div>;
@@ -24,32 +30,37 @@ const PodCard = () => {
 
   return (
     <>
-      {topPodcasts?.map((pod) => {
-        return (
-          <>
-            <div className="card_container" key={pod.id}>
-              <div className="image_container">
-                <div className="card_image">
-                  <img
-                    src={pod["im:image"][0].label}
-                    alt={pod["im:artist"].label}
-                  />
-                </div>
-              </div>
-              <div className="card_layout">
-                <div className="card_body">
-                  <div className="pod_title">
-                    <h4>{pod.title.label}</h4>
-                  </div>
-                  <div className="artist_name">
-                    <p>Author: {pod["im:artist"].label}</p>
+      <div className="card_grid">
+        {topPodcasts?.map((pod) => {
+          const podcastName = pod.title.label.split(" - ")[0];
+          const shorterName = podcastName.split(" with ")[0];
+          return (
+            <>
+              <div className="card_container" key={pod.id.attributes["im:id"]}>
+                <div className="image_container">
+                  <div className="card_image">
+                    <img
+                      src={pod["im:image"][1].label}
+                      alt={pod["im:artist"].label}
+                      className="podcast_image"
+                    />
                   </div>
                 </div>
+                <div className="card_layout">
+                  <div className="card_body">
+                    <div className="pod_title">
+                      <h2>{shorterName}</h2>
+                    </div>
+                    <div className="artist_name">
+                      <h4>Author: {pod["im:artist"].label}</h4>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </>
-        );
-      })}
+            </>
+          );
+        })}{" "}
+      </div>
     </>
   );
 };

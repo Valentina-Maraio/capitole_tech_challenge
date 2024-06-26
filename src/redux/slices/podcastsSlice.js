@@ -31,7 +31,7 @@ const podcastsSlice = createSlice({
         state.status = 'failed';
         state.error = action.error.message;
       });
-  }
+  },
 });
 
 export default podcastsSlice.reducer;
