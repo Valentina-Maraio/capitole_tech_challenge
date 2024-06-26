@@ -1,4 +1,4 @@
-.container {
+.nav_container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -6,15 +6,6 @@
   outline-color: transparent;
 }
 
-.link-text {
-  text-decoration: none;
-  color: #307b99;
-}
-
-.link-text:active {
-  text-decoration: none;
-  color: #207c79;
-}
 
 h2 {
   color: #307b99;
