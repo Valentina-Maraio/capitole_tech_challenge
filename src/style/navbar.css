@@ -1,5 +1,21 @@
 .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+  outline-color: transparent;
+}
+
+.link-text {
+  text-decoration: none;
+  color: #307b99;
+}
+
+.link-text:active {
+  text-decoration: none;
+  color: #207c79;
+}
+
+h2 {
+  color: #307b99;
 }
