@@ -35,8 +35,8 @@ const PodCard = () => {
     return <div>Error : {error}</div>;
   }
 
-  const handleCardClick = (podcast) => {
-    dispatch(setSelectedPodcast(podcast));
+  const handleCardClick = (podcast, podcastId) => {
+    dispatch(setSelectedPodcast(podcast, podcastId));
   };
 
   const filteredPodcasts = topPodcasts?.filter((pod) =>
