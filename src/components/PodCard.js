@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 const PodCard = () => {
   const dispatch = useDispatch();
   const { topPodcasts, status, error } = useSelector((state) => state.podcasts);
+  const searchQuery = useSelector((state) => state.search.query);
   console.log(topPodcasts);
 
   useEffect(() => {
@@ -22,10 +23,6 @@ const PodCard = () => {
     }
   }, [status, topPodcasts]);
 
-  if (status === "loading") {
-    return <div>Loading...</div>;
-  }
-
   if (status === "failed") {
     return <div>Error : {error}</div>;
   }
@@ -34,10 +31,14 @@ const PodCard = () => {
     dispatch(setSelectedPodcast(podcast));
   };
 
+  const filteredPodcasts = topPodcasts?.filter((pod) =>
+    pod.title.label.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <>
       <div className="card_grid">
-        {topPodcasts?.map((pod) => {
+        {filteredPodcasts?.map((pod) =>  {
           const podcastName = pod.title.label.split(" - ")[0];
           const shorterName = podcastName.split(" with ")[0];
           return (
