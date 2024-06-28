@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTopPodcasts } from "../redux/slices/podcastsSlice";
 import { setSelectedPodcast } from "../redux/slices/selectedPodcastSlice";
+import { setFilterCount } from "../redux/slices/podcastsSlice";
 import "../style/pod_card.css";
 import { Link } from "react-router-dom";
 
@@ -22,6 +23,13 @@ const PodCard = () => {
       localStorage.setItem("topPodcasts", JSON.stringify(topPodcasts));
     }
   }, [status, topPodcasts]);
+
+  useEffect(() => {
+    const filteredPodcasts = topPodcasts.filter((pod) =>
+      pod.title.label.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    dispatch(setFilterCount(filteredPodcasts.length));
+  }, [searchQuery, topPodcasts, dispatch]);
 
   if (status === "failed") {
     return <div>Error : {error}</div>;
