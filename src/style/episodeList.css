@@ -1,0 +1,14 @@
+.epi_container {
+    display: block;
+    border: 1px solid black;
+}
+
+.epi_number {
+    font-size: 30px;
+    color: orange;
+    border: 1px solid red;
+}
+
+.epi_list {
+    border: 1px solid green;
+}

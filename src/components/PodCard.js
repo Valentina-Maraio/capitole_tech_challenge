@@ -2,12 +2,14 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTopPodcasts } from "../redux/slices/podcastsSlice";
 import { setSelectedPodcast } from "../redux/slices/selectedPodcastSlice";
+import { setFilterCount } from "../redux/slices/podcastsSlice";
 import "../style/pod_card.css";
 import { Link } from "react-router-dom";
 
 const PodCard = () => {
   const dispatch = useDispatch();
   const { topPodcasts, status, error } = useSelector((state) => state.podcasts);
+  const searchQuery = useSelector((state) => state.search.query);
   console.log(topPodcasts);
 
   useEffect(() => {
@@ -22,22 +24,29 @@ const PodCard = () => {
     }
   }, [status, topPodcasts]);
 
-  if (status === "loading") {
-    return <div>Loading...</div>;
-  }
+  useEffect(() => {
+    const filteredPodcasts = topPodcasts.filter((pod) =>
+      pod.title.label.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    dispatch(setFilterCount(filteredPodcasts.length));
+  }, [searchQuery, topPodcasts, dispatch]);
 
   if (status === "failed") {
     return <div>Error : {error}</div>;
   }
 
-  const handleCardClick = (podcast) => {
-    dispatch(setSelectedPodcast(podcast));
+  const handleCardClick = (podcast, podcastId) => {
+    dispatch(setSelectedPodcast(podcast, podcastId));
   };
+
+  const filteredPodcasts = topPodcasts?.filter((pod) =>
+    pod.title.label.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <>
       <div className="card_grid">
-        {topPodcasts?.map((pod) => {
+        {filteredPodcasts?.map((pod) =>  {
           const podcastName = pod.title.label.split(" - ")[0];
           const shorterName = podcastName.split(" with ")[0];
           return (

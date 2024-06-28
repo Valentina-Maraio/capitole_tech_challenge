@@ -6,7 +6,9 @@ export const fetchPodcastEpisodes = createAsyncThunk(
   async (podcastId) => {
     const response = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(`https://itunes.apple.com/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=20`));
     const data = await response.json();
-    return JSON.parse(data.contents);
+    const parseData = JSON.parse(data.contents);
+    console.log('Fetched episodes:', parseData.results);
+    return parseData.results;
   }
 );
 
@@ -25,6 +27,7 @@ const episodesSlice = createSlice({
       })
       .addCase(fetchPodcastEpisodes.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        console.log('Updating state with fetched episodes:', action.payload);
         state.episodes = action.payload.results;
       })
       .addCase(fetchPodcastEpisodes.rejected, (state, action) => {

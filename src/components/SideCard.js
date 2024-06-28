@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import "../style/sidecard.css";
+import { formatDescription } from "../redux/utils";
 
 const SideCard = () => {
   const selectedPodcast = useSelector(
@@ -10,6 +11,8 @@ const SideCard = () => {
   if (!selectedPodcast) {
     return <div>No podcast selected</div>;
   }
+
+  const formattedDescription = formatDescription(selectedPodcast.summary.label)
 
   return (
     <>
@@ -27,7 +30,7 @@ const SideCard = () => {
         <div className="divider"></div>
         <div className="pod_description">
           <h4>Description:</h4>
-          <p>{selectedPodcast.summary.label}</p>
+          <p dangerouslySetInnerHTML={{ __html: formattedDescription }}></p>
         </div>
       </div>
     </>
