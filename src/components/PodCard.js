@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTopPodcasts } from "../redux/slices/podcastsSlice";
+import { setSelectedPodcast } from "../redux/slices/selectedPodcastSlice";
 import "../style/pod_card.css";
+import { Link } from "react-router-dom";
 
 const PodCard = () => {
   const dispatch = useDispatch();
@@ -28,6 +30,10 @@ const PodCard = () => {
     return <div>Error : {error}</div>;
   }
 
+  const handleCardClick = (podcast) => {
+    dispatch(setSelectedPodcast(podcast));
+  };
+
   return (
     <>
       <div className="card_grid">
@@ -36,27 +42,37 @@ const PodCard = () => {
           const shorterName = podcastName.split(" with ")[0];
           return (
             <>
-              <div className="card_container" key={pod.id.attributes["im:id"]}>
-                <div className="image_container">
-                  <div className="card_image">
-                    <img
-                      src={pod["im:image"][1].label}
-                      alt={pod["im:artist"].label}
-                      className="podcast_image"
-                    />
+              <Link
+                to={`/podcasts/${pod.id.attributes["im:id"]}`}
+                key={pod.id.attributes["im:id"]}
+                className="link-text"
+                onClick={() => handleCardClick(pod)}
+              >
+                <div
+                  className="card_container"
+                  key={pod.id.attributes["im:id"]}
+                >
+                  <div className="image_container">
+                    <div className="card_image">
+                      <img
+                        src={pod["im:image"][1].label}
+                        alt={pod["im:artist"].label}
+                        className="podcast_image"
+                      />
+                    </div>
+                  </div>
+                  <div className="card_layout">
+                    <div className="card_body">
+                      <div className="pod_title">
+                        <h2>{shorterName}</h2>
+                      </div>
+                      <div className="artist_name">
+                        <h4>Author: {pod["im:artist"].label}</h4>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div className="card_layout">
-                  <div className="card_body">
-                    <div className="pod_title">
-                      <h2>{shorterName}</h2>
-                    </div>
-                    <div className="artist_name">
-                      <h4>Author: {pod["im:artist"].label}</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              </Link>
             </>
           );
         })}{" "}
