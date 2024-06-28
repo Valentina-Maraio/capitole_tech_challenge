@@ -1,0 +1,41 @@
+.pod_container {
+    max-width: 340px;
+    max-height: auto;
+    border: 1px solid gray;
+    -moz-box-shadow: 0 0 8px gray;
+    -webkit-box-shadow: 0 0 8px gray;
+    box-shadow: 0 5px 8px gray;
+}
+
+.pod_image  img{
+    width: 200px;
+    height: 200px;
+}
+
+.pod_image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+}
+
+.divider {
+    width: 320px;
+    border: 1px solid black;
+    margin: 10px;
+}
+
+.pod_info {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    margin: 10px;
+    flex-direction: column;
+}
+
+.pod_description {
+    justify-content: center;
+    align-items: start;
+    margin: 10px;
+}
